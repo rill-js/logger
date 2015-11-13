@@ -23,7 +23,6 @@ module.exports = function (opts) {
 			req.path
 		);
 
-
 		res.original
 			.once("finish", done.bind(null, "finish"))
 			.once("close",  done.bind(null, "close"))
@@ -56,7 +55,7 @@ function log (ctx, start, len, err, event) {
 	// Get the status code of the response.
 	var status = err
 		? (err.code || 500)
-		: res.status;
+		: res.original.statusCode;
 
 	// Get color for status code.
 	var color = colorCodes[status / 100 | 0];

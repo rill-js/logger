@@ -46,7 +46,7 @@ function log (ctx, start, len, err, event) {
 	// Get the status code of the response.
 	var status = err
 		? (err.code || 500)
-		: res.status;
+		: res.original.statusCode;
 
 	// Get color for status code.
 	var color = colorCodes[status / 100 | 0];
