@@ -1,6 +1,6 @@
 {
   "name": "@rill/logger",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Logging middleware for Rill.",
   "author": "Dylan Piercey <pierceydylan@gmail.com>",
   "main": "server/index.js",
