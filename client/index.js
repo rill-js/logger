@@ -3,7 +3,7 @@ var bytes      = require("bytes");
 var colorCodes = {
 	5: "red",
 	4: "orange",
-	3: "cyan",
+	3: "royalblue",
 	2: "green",
 	1: "green"
 };
@@ -55,7 +55,7 @@ function log (ctx, start, len, err, event) {
 	var length;
 	if (~[204, 205, 304].indexOf(status)) {
 		length = "";
-	} else if (null == len) {
+	} else if (null == len || isNaN(len)) {
 		length = "-";
 	} else {
 		length = bytes(len);
