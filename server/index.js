@@ -62,9 +62,9 @@ function log (ctx, start, len, err, event) {
 	var color = colorCodes[status / 100 | 0];
 
 	var length;
-	if (~[204, 205, 304].indexOf(status)) {
+	if (~[204, 205, 304].indexOf(status) || req.method === "HEAD") {
 		length = "";
-	} else if (null == len) {
+	} else if (!len) {
 		length = "-";
 	} else {
 		length = bytes(len);

@@ -22,7 +22,6 @@ module.exports = function (opts) {
 			"color:gray;font-weight:normal"
 		);
 
-
 		res.original
 			.once("finish", done.bind(null, "finish"))
 			.once("close",  done.bind(null, "close"))
@@ -53,9 +52,9 @@ function log (ctx, start, len, err, event) {
 	var color = colorCodes[status / 100 | 0];
 
 	var length;
-	if (~[204, 205, 304].indexOf(status)) {
+	if (~[204, 205, 304].indexOf(status) || req.method === "HEAD") {
 		length = "";
-	} else if (null == len || isNaN(len)) {
+	} else if (!len) {
 		length = "-";
 	} else {
 		length = bytes(len);
