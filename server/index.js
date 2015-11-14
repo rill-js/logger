@@ -11,11 +11,18 @@ var colorCodes = {
 };
 
 module.exports = function (opts) {
+	opts       = opts || {};
+	opts.group = "group" in opts ? opts.group : false;
+	var method = opts.group ? "group" : "log";
+
+	// Shim console.group in node.
+	if (opts.group) require("console-group").install();
+
 	return function logger (ctx, next) {
 		var req = ctx.req;
 		var res = ctx.res;
 		var start = new Date;
-		console.log(
+		console[method](
 			"  " + chalk.gray("<--")
 			+ " " + chalk.bold("%s")
 			+ " " + chalk.gray("%s"),
@@ -38,18 +45,18 @@ module.exports = function (opts) {
 			})
 			.catch(function (err) {
 				// Log errors.
-				log(ctx, start, null, err);
+				log(opts, ctx, start, null, err);
 				throw err;
 			});
 
-		function done (event) { log(ctx, start, res.get("Content-Length"), null, event); }
+		function done (event) { log(opts, ctx, start, res.get("Content-Length"), null, event); }
 	};
 };
 
 /**
  * Log helper.
  */
-function log (ctx, start, len, err, event) {
+function log (opts, ctx, start, len, err, event) {
 	var req = ctx.req;
 	var res = ctx.res;
 	// Get the status code of the response.
@@ -88,6 +95,8 @@ function log (ctx, start, len, err, event) {
 		time(start),
 		length
 	);
+
+	if (opts.group) console.groupEnd();
 }
 
 /**

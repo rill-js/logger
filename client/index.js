@@ -9,11 +9,16 @@ var colorCodes = {
 };
 
 module.exports = function (opts) {
+	opts       = opts || {};
+	opts.group = "group" in opts ? opts.grop : false;
+	var method = opts.group ? "group" : "log";
+
 	return function logger (ctx, next) {
 		var req = ctx.req;
 		var res = ctx.res;
 		var start = new Date;
-		console.log(
+
+		console[method](
 			"%c" + "<--"
 			+ " %c" + req.method
 			+ " %c" + req.path,
@@ -29,18 +34,18 @@ module.exports = function (opts) {
 		return next()
 			.catch(function (err) {
 				// Log errors.
-				log(ctx, start, null, err);
+				log(opts, ctx, start, null, err);
 				throw err;
 			});
 
-		function done (event) { log(ctx, start, res.get("Content-Length"), null, event); }
+		function done (event) { log(opts, ctx, start, res.get("Content-Length"), null, event); }
 	};
 };
 
 /**
  * Log helper.
  */
-function log (ctx, start, len, err, event) {
+function log (opts, ctx, start, len, err, event, group) {
 	var req = ctx.req;
 	var res = ctx.res;
 	// Get the status code of the response.
@@ -85,6 +90,8 @@ function log (ctx, start, len, err, event) {
 		"color:gray",
 		"color:gray"
 	);
+
+	if (opts.group) console.groupEnd();
 }
 
 /**

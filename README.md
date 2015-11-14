@@ -28,6 +28,14 @@ const logger = require("@rill/logger");
 app.use(logger());
 ```
 
+# Options
+
+```js
+{
+	group: false // If true, will use console.group instead of log. (Shims in node)
+}
+```
+
 # Notes
 Recommended that you `.use()` this middleware near the top to "wrap" all subsequent middleware.
 

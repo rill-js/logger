@@ -12,7 +12,7 @@ describe("Rill/Logger", function () {
 	it("should work on the server", function (done) {
 		var request = agent(
 			Rill()
-				.use(logger())
+				.use(logger({ group: true }))
 				.use(function (ctx, next) {
 					ctx.res.body = fs.createReadStream(__filename);
 					return next();
