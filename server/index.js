@@ -60,12 +60,12 @@ function log (opts, ctx, start, len, err, event) {
 	var req = ctx.req;
 	var res = ctx.res;
 	// Get the status code of the response.
-	var status = err
+	var status = err && typeof err.code == "number"
 		? (err.code || 500)
 		: res.original.statusCode;
 
 	// Get color for status code.
-	var color = colorCodes[status / 100 | 0] || "red";
+	var color = colorCodes[status / 100 | 0];
 
 	var length;
 	if (~[204, 205, 304].indexOf(status) || req.method === "HEAD") {
