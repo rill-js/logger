@@ -65,7 +65,7 @@ function log (opts, ctx, start, len, err, event) {
 		: res.original.statusCode;
 
 	// Get color for status code.
-	var color = colorCodes[status / 100 | 0];
+	var color = colorCodes[status / 100 | 0] || "red";
 
 	var length;
 	if (~[204, 205, 304].indexOf(status) || req.method === "HEAD") {
