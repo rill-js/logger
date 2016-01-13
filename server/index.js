@@ -61,7 +61,7 @@ function log (opts, ctx, start, len, err, event) {
 	var res = ctx.res;
 	// Get the status code of the response.
 	var status = err
-		? (err.code || 500)
+		? typeof err.code == "number" ? err.code : 500
 		: res.original.statusCode;
 
 	// Get color for status code.
