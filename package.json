@@ -1,6 +1,6 @@
 {
   "name": "@rill/logger",
-  "version": "0.1.4",
+  "version": "0.1.7",
   "description": "Logging middleware for Rill.",
   "author": "Dylan Piercey <pierceydylan@gmail.com>",
   "main": "server/index.js",
@@ -20,12 +20,12 @@
   ],
   "devDependencies": {
     "gulp": "^3.9.0",
-    "gulp-mocha": "^2.1.3",
-    "rill": "^0.1.5",
+    "gulp-mocha": "^2.2.0",
+    "rill": "^0.4.16",
     "supertest": "^1.1.0"
   },
   "dependencies": {
-    "bytes": "^2.1.0",
+    "bytes": "^2.2.0",
     "chalk": "^1.1.1",
     "console-group": "^0.1.2",
     "humanize-number": "0.0.2",
