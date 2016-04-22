@@ -10,7 +10,7 @@ var colorCodes = {
 
 module.exports = function (opts) {
   opts = opts || {}
-  opts.group = 'group' in opts ? opts.grop : false
+  opts.group = 'group' in opts ? opts.group : false
   var method = opts.group ? 'group' : 'log'
 
   return function logger (ctx, next) {
