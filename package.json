@@ -1,7 +1,7 @@
 {
   "name": "@rill/logger",
   "description": "Logging middleware for Rill.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Dylan Piercey <pierceydylan@gmail.com>",
   "browser": "client/index.js",
   "bugs": "https://github.com/rill-js/logger/issues",
@@ -15,8 +15,8 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-mocha": "^2.2.0",
-    "rill": "^0.5.6",
-    "snazzy": "^3.0.0",
+    "rill": "^0.5.15",
+    "snazzy": "^3.0.1",
     "standard": "^6.0.8",
     "supertest": "^1.2.0"
   },
