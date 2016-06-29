@@ -50,7 +50,7 @@ function log (opts, ctx, start, len, err, event, group) {
   var res = ctx.res
   // Get the status code of the response.
   var status = err
-    ? typeof err.code === 'number' || typeof err.code === 'string' ? err.code : 500
+    ? isNaN(err.code) ? 500 : Number(err.code)
     : res.original.statusCode
 
   // Get color for status code.
