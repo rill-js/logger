@@ -15,7 +15,7 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-mocha": "^2.2.0",
-    "rill": "^0.6.7",
+    "rill": "^0.6.8",
     "snazzy": "^4.0.0",
     "standard": "^7.1.2",
     "supertest": "^1.2.0"
