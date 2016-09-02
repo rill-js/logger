@@ -42,7 +42,6 @@ Isomorphic request logging for Rill. With colors!
 
 # Installation
 
-#### Npm
 ```console
 npm install @rill/logger
 ```
