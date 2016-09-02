@@ -1,3 +1,5 @@
+'use strict'
+
 var humanize = require('humanize-number')
 var bytes = require('bytes')
 var colorCodes = {

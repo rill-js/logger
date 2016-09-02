@@ -1,3 +1,5 @@
+'use strict'
+
 var Counter = require('passthrough-counter')
 var humanize = require('humanize-number')
 var bytes = require('bytes')

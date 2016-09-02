@@ -1,11 +1,9 @@
+'use strict'
+
 var fs = require('fs')
 var agent = require('supertest')
 var Rill = require('rill')
 var logger = require('../server')
-
-/**
- * Tests coming soon.
- */
 
 describe('Rill/Logger', function () {
   it('should work on the server', function (done) {
