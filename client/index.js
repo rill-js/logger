@@ -14,11 +14,11 @@ var hasConsole = Boolean(window.console)
 // Check for console.group support.
 var hasGroup = hasConsole && typeof console.group === 'function'
 // Check for console styling support.
-var hasColors = hasConsole && (
+var hasColors = hasConsole && Boolean(
   // is webkit? http://stackoverflow.com/a/16459606/376773
   ('WebkitAppearance' in document.documentElement.style) ||
   // is firebug? http://stackoverflow.com/a/398120/376773
-  (console.firebug || (console.exception && console.table)) ||
+  (console.firebug) ||
   // is firefox >= v31?
   // https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
   (navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31)
