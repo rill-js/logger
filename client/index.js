@@ -9,25 +9,49 @@ var colorCodes = {
   2: 'green',
   1: 'green'
 }
+// Check for console support.
+var hasConsole = Boolean(window.console)
+// Check for console.group support.
+var hasGroup = hasConsole && typeof console.group === 'function'
+// Check for console styling support.
+var hasColors = hasConsole && (
+  // is webkit? http://stackoverflow.com/a/16459606/376773
+  ('WebkitAppearance' in document.documentElement.style) ||
+  // is firebug? http://stackoverflow.com/a/398120/376773
+  (console.firebug || (console.exception && console.table)) ||
+  // is firefox >= v31?
+  // https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
+  (navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31)
+)
+var styleCode = hasColors ? '%c' : ''
 
 module.exports = function (opts) {
   opts = opts || {}
-  opts.group = 'group' in opts ? opts.group : false
-  var method = opts.group ? 'group' : 'log'
+  // Don't try to log without a console.
+  if (!hasConsole) return
+  // Use console.group if we have browser support and it is enabled.
+  var method = hasGroup && opts.group ? 'group' : 'log'
 
   return function logger (ctx, next) {
     var req = ctx.req
     var res = ctx.res
     var start = new Date()
-
-    console[method](
-      '%c' + '<--' +
-      ' %c' + req.method +
-      ' %c' + req.path,
-      'color:gray',
-      'color:initial;font-weight:bold',
-      'color:gray;font-weight:normal'
+    var consoleText = (
+      styleCode + '<--' +
+      ' ' + styleCode + req.method +
+      ' ' + styleCode + req.path
     )
+
+    if (hasColors) {
+      console[method](
+        consoleText,
+        'color:gray',
+        'color:initial;font-weight:bold',
+        'color:gray;font-weight:normal'
+      )
+    } else {
+      console[method](consoleText)
+    }
 
     res.original
       .once('finish', done.bind(null, 'finish'))
@@ -78,20 +102,28 @@ function log (opts, ctx, start, len, err, event, group) {
     startText = '-x-'
   }
 
-  console.log(
-    '%c' + startText +
-    '%c ' + req.method +
-    '%c ' + req.path +
-    '%c ' + status +
-    '%c ' + time(start) +
-    '%c ' + length,
-    'color:' + startColor,
-    'color:initial;font-weight:bold',
-    'color:gray;font-weight:normal',
-    'color:' + color,
-    'color:gray',
-    'color:gray'
+  var consoleText = (
+    styleCode + startText +
+    styleCode + ' ' + req.method +
+    styleCode + ' ' + req.path +
+    styleCode + ' ' + status +
+    styleCode + ' ' + time(start) +
+    styleCode + ' ' + length
   )
+
+  if (hasColors) {
+    console.log(
+      consoleText,
+      'color:' + startColor,
+      'color:initial;font-weight:bold',
+      'color:gray;font-weight:normal',
+      'color:' + color,
+      'color:gray',
+      'color:gray'
+    )
+  } else {
+    console.log(consoleText)
+  }
 
   if (opts.group) console.groupEnd()
 }
