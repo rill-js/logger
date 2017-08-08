@@ -3,7 +3,7 @@
   <img src="https://raw.githubusercontent.com/rill-js/rill/master/Rill-Icon.jpg" alt="Rill"/>
   <br/>
   @rill/logger
-	<br/>
+  <br/>
 
   <!-- Stability -->
   <a href="https://nodejs.org/api/documentation.html#documentation_stability_index">
@@ -50,7 +50,7 @@ npm install @rill/logger
 
 ```javascript
 const app = require('rill')()
-const logger = require('@rill/logger');
+const logger = require('@rill/logger')
 
 app.use(logger())
 ```
@@ -59,7 +59,7 @@ app.use(logger())
 
 ```js
 {
-	group: false // If true, will use console.group instead of log. (Shims in node)
+  group: false // If true, will use console.group instead of log. (Shims in node)
 }
 ```
 
