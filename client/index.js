@@ -83,7 +83,7 @@ function log (opts, ctx, start, len, err, event, group) {
   var color = colorCodes[status / 100 | 0] || 'red'
 
   var length
-  if (~[204, 205, 304].indexOf(status) || req.method === 'HEAD') {
+  if (~[204, 205, 304].indexOf(status) || req.method === 'HEAD' || res.body === ' ') {
     length = ''
   } else if (!len) {
     length = '-'
