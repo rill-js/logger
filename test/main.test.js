@@ -16,6 +16,7 @@ describe('Rill/Logger', function () {
         })
         .get('/', respond(200))
         .listen()
+        .unref()
     )
 
     request

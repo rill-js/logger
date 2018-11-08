@@ -33,8 +33,8 @@ module.exports = function (opts) {
     )
 
     res.original
-      .once('finish', done.bind(null, 'finish'))
-      .once('close', done.bind(null, 'close'))
+      .once('finish', handleFinish)
+      .once('close', handleClose)
 
     return next()
       .then(function () {
@@ -51,7 +51,19 @@ module.exports = function (opts) {
         throw err
       })
 
-    function done (event) { log(opts, ctx, start, res.get('Content-Length'), null, event) }
+    function done (event) {
+      log(opts, ctx, start, res.get('Content-Length'), null, event)
+    }
+
+    function handleFinish () {
+      res.original.removeListener('close', handleClose)
+      done(null, 'finish')
+    }
+
+    function handleClose () {
+      res.original.removeListener('finish', handleFinish)
+      done(null, 'close')
+    }
   }
 }
 
